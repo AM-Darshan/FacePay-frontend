@@ -54,7 +54,12 @@
   
   #request-message {
     font-size: 1.25rem;
-    padding: 0 0 2.5rem 0;
+    padding: 0 0 1rem 0;
+  }
+
+  #recharge-message {
+    font-size: 1.25rem;
+    padding: 0 0 1rem 0;
   }
 
   #failure-reason {

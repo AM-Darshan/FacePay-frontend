@@ -14,6 +14,11 @@ const Payment = () => {
     (state) => state.rechargeBalanceReducer
   );
 
+  const balance = useAppSelector(
+    (state) => state.profileDetailsReducer.balance
+  );
+
+  const total_balance = Number(balance) + Number(rechargeBalanceStore.amount);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (rechargeBalanceStore.rechargeStatus === "done") {
@@ -66,7 +71,11 @@ const Payment = () => {
           Success!
         </p>
         <p id="request-message" className="message">
-          Your request has been processed successfully.
+          Your recharge for ₹{rechargeBalanceStore.amount} has been successfully
+          processed.
+        </p>
+        <p id="recharge-message" className="message">
+          Account Balance = {total_balance}
         </p>
         <p id="failure-reason" className="message hide">
           Face was not verified successfully.

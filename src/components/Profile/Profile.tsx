@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import swal from "sweetalert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -19,7 +19,7 @@ const Profile = () => {
     setPhoto(URL.createObjectURL(event.target.files[0]));
     setUploadText("Photo uploaded successfully!");
   };
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (loginStore.loginEmail !== "" && profileStore.email === "") {
       dispatch(getProfileDetails(loginStore.loginEmail));
@@ -33,9 +33,12 @@ const Profile = () => {
   return (
     <div>
       <header id="header">
-        <Link to="/">
-          <img className="logo-img" src="./images/logo.png" alt="logo" />
-        </Link>
+        <img
+          className="logo-img"
+          src="./images/logo.png"
+          alt="logo"
+          onClick={() => navigate("/")}
+        />
       </header>
 
       <div className="message-container">
