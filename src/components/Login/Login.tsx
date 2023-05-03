@@ -5,6 +5,7 @@ import "./login.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   loginDetails,
+  resetLoginDetails,
   setLoginEmail,
   setLoginPassword,
 } from "../../app/userData/loginSlice";
@@ -28,9 +29,10 @@ const Login = () => {
       swal("Login In successful", "", "success");
       navigate("/");
     } 
-    // else {
-    //   swal("Login unsuccessful", "Email or Password is invalid!", "warning");
-    // }
+    else if(loginStore.loginStatus === "reject"){
+      dispatch(resetLoginDetails());
+      swal("Login unsuccessful", "Email or Password is invalid!", "warning");
+    }
   });
   return (
     <div>

@@ -4,6 +4,9 @@ import lottie from "lottie-web";
 import "./payment.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setRechargeStatus } from "../../app/userData/rechargeBalance";
+import { resetLoginDetails } from "../../app/userData/loginSlice";
+import { resetRegisterDetails } from "../../app/userData/registerSlice";
+import { resetProfileData } from "../../app/userData/profileDetails";
 const Payment = () => {
   const animationContainer = useRef(null);
 
@@ -26,6 +29,12 @@ const Payment = () => {
     }
   }, [rechargeBalanceStore.rechargeStatus]);
 
+  function handleHomeClick() {
+    dispatch(setRechargeStatus(""));
+    dispatch(resetLoginDetails());
+    dispatch(resetRegisterDetails());
+    dispatch(resetProfileData());
+  }
   return (
     <div>
       <header id="header">
@@ -74,7 +83,7 @@ const Payment = () => {
             <button
               id="home-btn"
               className="submit-btn-payment"
-              onClick={() => dispatch(setRechargeStatus(""))}
+              onClick={handleHomeClick}
             >
               Home
             </button>

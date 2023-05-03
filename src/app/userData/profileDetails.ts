@@ -40,7 +40,17 @@ export const getProfileDetails = createAsyncThunk(
 export const profileDetailsSlice = createSlice({
   name: "profileDetailsSlice",
   initialState: initState,
-  reducers: {},
+  reducers: {
+    resetProfileData: (state) => {
+      state.email = "";
+      state.mobile = "";
+      state.facePayID = "";
+      state.name = "";
+      state.username = "";
+      state.balance = 0;
+      state.userDetailsStatus = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProfileDetails.fulfilled, (state, action) => {
@@ -64,5 +74,5 @@ export const profileDetailsSlice = createSlice({
       });
   },
 });
-export const {} = profileDetailsSlice.actions;
+export const {resetProfileData} = profileDetailsSlice.actions;
 export default profileDetailsSlice.reducer;

@@ -85,5 +85,6 @@ export const {
   setPassword,
   setPhoneNumber,
   setUserName,
+  resetRegisterDetails
 } = registerDetailsSlice.actions;
 export default registerDetailsSlice.reducer;

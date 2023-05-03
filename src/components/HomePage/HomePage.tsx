@@ -3,10 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./homePage.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { resetLoginDetails } from "../../app/userData/loginSlice";
-import {
-  setRechargeStatus,
-  setPhoneNumber,
-} from "../../app/userData/rechargeBalance";
+import { setPhoneNumber } from "../../app/userData/rechargeBalance";
 import {
   rechargeBalancePost,
   setAmount,
@@ -42,13 +39,18 @@ const HomePage = () => {
 
   function handleWalletTransfer(event: any) {
     event.preventDefault();
-    const postRechargeBody = {
-      phone: rechargeStore.phoneNumber,
-      userID: rechargeStore.facePayId,
-      amount: rechargeStore.amount,
-    };
-    console.log(postRechargeBody);
-    dispatch(rechargeBalancePost(postRechargeBody));
+    if (loginStore.loginStatus !== "done") {
+      console.log("login now");
+      navigate("/login");
+    } else {
+      const postRechargeBody = {
+        phone: rechargeStore.phoneNumber,
+        userID: rechargeStore.facePayId,
+        amount: rechargeStore.amount,
+      };
+      console.log(postRechargeBody);
+      dispatch(rechargeBalancePost(postRechargeBody));
+    }
   }
   useEffect(() => {
     if (rechargeStore.rechargeStatus === "reject") {
@@ -62,7 +64,6 @@ const HomePage = () => {
         }
       });
     } else if (rechargeStore.rechargeStatus === "done") {
-      console.log("bscbsd");
       navigate("/payment");
     }
   }, [navigate, rechargeStore.rechargeStatus]);
@@ -74,7 +75,7 @@ const HomePage = () => {
             <img className="logo-img" src="./images/logo.png" alt="logo" />
           </Link>
 
-          {registerStore.registerStatus === "" && (
+          {registerStore.registerStatus === "" && loginStore.loginStatus !== "done" &&(
             <Link id="signup" className="signup-className" to="/register">
               Sign Up
             </Link>

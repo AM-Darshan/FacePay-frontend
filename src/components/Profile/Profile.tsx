@@ -21,7 +21,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (loginStore.loginEmail !== "") {
+    if (loginStore.loginEmail !== "" && profileStore.email === "") {
       dispatch(getProfileDetails(loginStore.loginEmail));
     }
   }, [loginStore.loginEmail]);
@@ -62,11 +62,11 @@ const Profile = () => {
           </div>
 
           <div className="right-container">
-            {/* {profileStore.facePayID === "" && (
+            {profileStore.facePayID === "" && (
               <Box sx={{ display: "flex" }}>
                 <CircularProgress />
               </Box>
-            )} */}
+            )}
             <div id="profile-details" className="profile-container">
               <p className="profile-text-title">
                 Name:{" "}
