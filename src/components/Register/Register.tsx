@@ -49,7 +49,7 @@ const Register = () => {
       balance: 10,
     };
     console.log(postBody);
-    dispatch(userDataImages(uploadedImages));
+    dispatch(userDataImages({images: uploadedImages,name: registerStore.fullName}));
     dispatch(registerDetails(postBody));
   };
 

@@ -5,7 +5,6 @@ import {
   setUploadStatus,
 } from "../../../app/userData/imageUploadSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
-import state from "sweetalert/typings/modules/state";
 
 const ImageUploader = () => {
   const dispatch = useAppDispatch();

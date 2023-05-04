@@ -20,7 +20,8 @@ const uri =
 const client = new MongoClient(uri);
 
 app.post("/api/upload-image", async (req, res) => {
-  const { userImages } = req.body;
+  const uploadImages = req.body.userImages;
+  const username = req.body.name;
   // const base64Image = userImages[0].split(";base64,").pop();
   // const imageBuffer = Buffer.from(base64Image, "base64");
 
@@ -28,10 +29,11 @@ app.post("/api/upload-image", async (req, res) => {
     await client.connect();
     const database = client.db("facepay");
     const collection = database.collection("images");
-    for (let i = 0; i < userImages.length; i++) {
-      const base64Image = userImages[i];
+    console.log("name:" + username);
+    for (let i = 0; i < uploadImages.length; i++) {
+      const base64Image = uploadImages[i];
       console.log("uploading", base64Image);
-      await collection.insertOne({ img: base64Image, user_id: "Darshan" });
+      await collection.insertOne({ img: base64Image, user_id: username });
     }
     await client.close();
     console.log("added...");

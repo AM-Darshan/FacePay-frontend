@@ -16,11 +16,11 @@ const initState: initType = {
 
 export const userDataImages = createAsyncThunk(
   "post/useData",
-  async (images: any, { fulfillWithValue, rejectWithValue }) => {
+  async (args: any, { fulfillWithValue, rejectWithValue }) => {
     try {
       const url = baseURLNode + "/api/upload-image";
       console.log(url);
-      const response = await axios.post(url, {userImages: images});
+      const response = await axios.post(url, {userImages: args.images, name: args.name});
       const data = response.data;
       return fulfillWithValue(data);
     } catch (err) {
